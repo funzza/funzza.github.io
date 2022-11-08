@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-算法学习-简单排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2022-11-08T12:49:22.000Z" itemprop="datePublished">2022-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F/">算法学习-简单排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="subject1-常数时间的操作"><a href="#subject1-常数时间的操作" class="headerlink" title="subject1 常数时间的操作"></a>subject1 常数时间的操作</h2><p><em>一个操作如果和样本的数据量没有关系，每次都是固定时间内完成的操作，叫做常数操作</em></p>
+<p>时间复杂度为一个算法流程中，常数操作数量的一个指标。常用O（big O）来表示。具体来说，先要对一个算法流程非常熟悉，然后去写出这个算法流程中，发生了多少常数操作，进而总结出常数操作数量的表达式。</p>
+<p>在表达式中，只要高阶项，不要低阶项，也不要高阶项的系数，剩下的部分如果为f(N)，那么时间复杂度为O(f(N))。</p>
+<p>评价一个算法流程的好坏，先看时间复杂度的指标，然后再分析不同数据样本下的实际运行时间，也就是“常数项时间”。</p>
+<h2 id="subject2-选择排序、冒泡排序细节与复杂度分析"><a href="#subject2-选择排序、冒泡排序细节与复杂度分析" class="headerlink" title="subject2 选择排序、冒泡排序细节与复杂度分析"></a>subject2 选择排序、冒泡排序细节与复杂度分析</h2><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>给定一个数组，数组长度为N。</p>
+<p>从i(0)位置到N-1位置遍历，找到最小的元素，与0位置元素做交换，固定0位置元素为最小；</p>
+<p>从i(1)位置到N-1位置遍历，找到最小的元素，与1位置元素做交换，固定1位置元素为第二小；</p>
+<p>直到i = N -1，结束循环。</p>
+<p><em>时间复杂度为O(N^2),额外空间复杂度O(1)</em></p>
+<p>code:</p>
+<pre><code class="java">    public static void sort(int[] nums) &#123;
+        if(nums == null || nums.length &lt; 2) &#123;
+            return;
+        &#125;
+
+        for (int i = 0; i &lt; nums.length; i++) &#123;
+            int minIndex = i;
+            for (int j = i; j &lt; nums.length; j++) &#123;
+                minIndex = nums[j] &lt; nums[minIndex] ? j : minIndex;
+            &#125;
+            swap(i, minIndex, nums);
+        &#125;
+    &#125;
+</code></pre>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>给定一个数组nums，数组长度为N。</p>
+<p>从0到N-2位置遍历，将当前每一个元素与后面一个元素做比较，前面的元素比后面的元素大则两两交换，一轮循环后，固定数组N-1元素为该数组中元素最大值；</p>
+<p>第二轮循环，从0位置到N-3位置遍历…固定数组中N-2为该数组中元素第二大的值；</p>
+<p>直到没有相邻元素需要交换，数组有序。</p>
+<p><em>时间复杂度O(N^2)，额外空间复杂度O(1)</em></p>
+<p>code:</p>
+<pre><code class="java">    public static void sort(int[] nums) &#123;
+        if (nums == null || nums.length &lt; 2) &#123;
+            return;
+        &#125;
+
+        for (int i = nums.length - 1; i &gt; 0; i--) &#123;
+            for (int j = 0; j &lt; i; j++) &#123;
+                if(nums[j] &gt; nums[j + 1]) &#123;
+                    swap(j, j + 1, nums);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<h2 id="subject3-异或运算-（-）"><a href="#subject3-异或运算-（-）" class="headerlink" title="subject3 异或运算 （^）"></a>subject3 异或运算 （^）</h2><p><em>相同为0不同为1</em></p>
+<p><strong>还可以理解为无进位相加</strong></p>
+<ul>
+<li>0 ^ N = N     N ^ N = 0</li>
+<li>异或运算满足交换律和结合律</li>
+</ul>
+<p>code:</p>
+<pre><code class="java">    public static void swap() &#123;
+        int a = 甲;
+        int b = 乙;
+
+        a = a ^ b;
+        b = a ^ b;
+        a = a ^ b;
+    &#125;
+</code></pre>
+<p>第一条语句得：</p>
+<p>​    a = 甲 ^ 乙</p>
+<p>​    b = 乙</p>
+<p>第二条语句得：</p>
+<p>​    a = 甲 ^ 乙</p>
+<p>​    b = a ^ b<br>​      = (甲 ^ 乙) ^ 乙<br>​      = 甲</p>
+<p>第三条语句得：</p>
+<pre><code>b = 甲
+</code></pre>
+<p>​    a = a ^ b<br>​      = (甲 ^ 乙) ^ 甲<br>​      = 乙</p>
+<h3 id="example"><a href="#example" class="headerlink" title="example"></a>example</h3><p>leetcode136. 只出现一次的数字<br>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<p>说明：</p>
+<p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
+<p>示例 1:</p>
+<p>输入: [2,2,1]<br>输出: 1<br>示例 2:</p>
+<p>输入: [4,1,2,1,2]<br>输出: 4</p>
+<p>题解： 此题可以利用异或相等得0的性质。将该数组所有元素进行异或，最后得到的元素为只出现了一次的元素。</p>
+<p>code:</p>
+<pre><code class="java">class Solution &#123;
+    public int singleNumber(int[] nums) &#123;
+        int result = 0;
+
+        for (int num : nums) &#123;
+            result ^= num;
+        &#125;
+        return result;
+    &#125;
+&#125;
+</code></pre>
+<p>拓展：</p>
+<p>给定一个非空整数数组，除了某两个元素只出现一次以外，其余每个元素均出现两次。找出那两个只出现了一次的元素。</p>
+<p>题解：</p>
+<p>​    首先，将整个数组异或一边，得到的结果为两个只出现一次元素的异或结果。<br>​    设这两个元素分别为a和b,结果为result，则result = a ^ b。<br>​    因为a、b不相等，所以a、b的二进制值必然至少有一位不相等。<br>​    而相等的元素其二进制值每一位都相等。<br>​    我们不妨以a、b不相等的一位做区分，将元素分为在那一位为0的和在那一位为1的，相同的元素必然只会出现一组中，所以任意一组的除a、b外其它相同元素的个数都是偶数个。<br>​    此时，元素被分为了两组，a、b不在一组中，那么将任意一组进行异或操作，最后的结果就是a或b。<br>​    此时得到的结果与result进行异或，则找到另一个只出现一次的元素。</p>
+<p>code:</p>
+<pre><code class="java">    public static void printOddTimesNum2(int[] arr) &#123;
+        int eor = 0;
+        for (int curNum : arr) &#123;
+            eor ^= curNum;
+        &#125;
+
+        // 一个数取反后 得到的结果与原数的每一位都相反
+        // 在取反的这个结果上再加上1,则至少有一位与原数相同
+        // 而这一位就是这个数最右边的一个1（这里不能准确的总结出相关的数学规律，
+        // 可以写几个数代入尝试）
+        // 原数与补码（取反+1）进行与运算，得到其它位为0，原数最右最右边的一个1保留的数
+        int onlyOne1 = 0;
+        int rightOne = eor &amp; (~eor + 1);        
+        for (int cur : arr) &#123;
+            // 与运算：同1得1，其余得0
+            // 所以，这里能够找到原数组中在那一位为0的数
+            // 也就是说我们完成了分组的目的，将其全部进行异或，得到其中一个结果
+            if ((cur &amp; rightOne) == 0) &#123;
+                onlyOne1 ^= cur;
+            &#125;
+        &#125;
+
+        int onlyOne2 = eor ^ onlyOne1;
+
+        System.out.println(onlyOne1 + &quot;&amp;&quot; + onlyOne2);
+    &#125;
+</code></pre>
+<h2 id="subject4-插入排序"><a href="#subject4-插入排序" class="headerlink" title="subject4 插入排序"></a>subject4 插入排序</h2><p>插入排序的基本思想是将一个记录插入到已经排好序的有序数组中，从而扩充该有序数组，直至这个有序数组的长度与需要排序的数组长度相等。</p>
+<p>具体做法：</p>
+<p>从有序数组的边界相邻后一个元素从右向左与有序数组的每一位进行比较，如果比数组中的元素值小，则两两交换。当遍历只位置为1或不比当前比较的有序数组中的元素值小则停止比较，有序数组长度+1。直至这个有序数组的长度与需要排序的数组长度相等。</p>
+<p><em>时间复杂度O(N^2)，额外空间复杂度O(1)</em></p>
+<p>当一个数组本身有序的时候，算法时间复杂度是O(N)。当我们要对一个大部分元素有序的数组进行排序时，可以使用插入排序。</p>
+<p>code:</p>
+<pre><code class="java">    public static void sort(int[] arr) &#123;
+
+        for (int i = 1; i &lt; arr.length; i++) &#123;
+            for (int j = i; j &gt; 0 &amp;&amp; arr[j] &lt; arr[j - 1]; j--) &#123;
+                swap(arr, j, j - 1);
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<h2 id="subject5-二分法"><a href="#subject5-二分法" class="headerlink" title="subject5 二分法"></a>subject5 二分法</h2><h3 id="在一个有序数组中，找某个数是否存在"><a href="#在一个有序数组中，找某个数是否存在" class="headerlink" title="在一个有序数组中，找某个数是否存在"></a><em>在一个有序数组中，找某个数是否存在</em></h3><p>code:</p>
+<pre><code class="java">    public static int exist(int[] arr, int num) &#123;
+
+        int left = 0;
+        int right = arr.length - 1;
+        int middle = ((right - left) &gt;&gt; 1) + left;
+
+        while(left &lt;= right) &#123;
+            if (num &gt; arr[middle]) &#123;
+                left = middle + 1;
+                middle = ((right - left) &gt;&gt; 1) + left;
+            &#125; else if (num &lt; arr[middle]) &#123;
+                right = middle - 1;
+                middle = ((right - left) &gt;&gt; 1) + left;
+            &#125; else &#123;
+                return middle;
+            &#125;
+        &#125;
+
+        return -1;
+    &#125;
+</code></pre>
+<h3 id="在一个有序数组中，找-gt-某个数最左侧的位置"><a href="#在一个有序数组中，找-gt-某个数最左侧的位置" class="headerlink" title="在一个有序数组中，找 &gt;= 某个数最左侧的位置"></a><em>在一个有序数组中，找 &gt;= 某个数最左侧的位置</em></h3><pre><code class="java">    public static int neartLeft(int[] arr, int num) &#123;
+
+        int left = 0;
+        int right = arr.length - 1;
+        int middle = ((right - left) &gt;&gt; 1) + left;
+        int result = Integer.MAX_VALUE;
+
+        while (left &lt;= right) &#123;
+            if (num &gt; arr[middle]) &#123;
+                left = middle + 1;
+                middle = ((right - left) &gt;&gt; 1) + left;
+            &#125; else if (num &lt; arr[middle]) &#123;
+                right = middle - 1;
+                middle = ((right - left) &gt;&gt; 1) + left;
+            &#125; else &#123;
+                result = middle;
+                right = middle - 1;
+                middle = ((right - left) &gt;&gt; 1) + left;
+            &#125;
+        &#125;
+
+        if (result &lt; Integer.MAX_VALUE) &#123;
+            return result;
+        &#125; else &#123;
+            return -1;
+        &#125;
+    &#125;
+</code></pre>
+<h3 id="局部最小值问题"><a href="#局部最小值问题" class="headerlink" title="局部最小值问题"></a><em>局部最小值问题</em></h3><p>给定一个无序数组，相邻两个数一定不相等</p>
+<p>局部最小：</p>
+<pre><code>* 0位置的元素比1位置的元素小，则0位置的元素为局部最小
+    * n-1位置的元素比n-2位置的元素小，则n-1位置的元素为局部最小
+    * i位置的元素比i-1、i+1位置的元素小，则i位置的元素为局部最小
+</code></pre>
+<h2 id="subject6-对数器"><a href="#subject6-对数器" class="headerlink" title="subject6 对数器"></a>subject6 对数器</h2><pre><code>* 有一个需要测试的方法A
+    * 有一个实现复杂度不好，但是容易实现的方法B
+    * 实现一个随机样本产生器
+    * 把方法A和方法B跑相同的随机样本，看看得到的结果是否一样
+    * 如果有一个随机样本使得比对结果不一致，打印样本进行人工干预
+    * 当样本数量很多时比对测试依然正确，可以确定方法A已经正确
+</code></pre>
+<h2 id="subject7-递归"><a href="#subject7-递归" class="headerlink" title="subject7 递归"></a>subject7 递归</h2><p><em>递归行为和时间复杂度的估算</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F/" data-id="cla87v3jt0000fgtt7lxddmrn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="tag">算法学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="tag">算法学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/11/08/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F/">算法学习-简单排序</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
